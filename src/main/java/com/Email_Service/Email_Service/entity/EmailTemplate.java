@@ -1,22 +1,29 @@
 package com.Email_Service.Email_Service.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
+
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Builder
 @Table(name = "email_templates")
 public class EmailTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String templateName; // Unique name for the template (e.g., REGISTRATION_VERIFICATION)
+    private String templateName; // e.g., "USER_REGISTRATION", "BOOKING_CONFIRMATION"
 
-    @Column(nullable = false)
-    private String subject; // Subject of the email template
+    private String subject; // Email subject
 
-    @Column(columnDefinition = "TEXT", nullable = false)
-    private String body; // Body of the email template (can include placeholders like {name}, {verificationLink})
+    @Column(columnDefinition = "TEXT")
+    private String body; // Email body with placeholders like {{username}}
+
+    private String templateType; // "HTML" or "TEXT"
 }
