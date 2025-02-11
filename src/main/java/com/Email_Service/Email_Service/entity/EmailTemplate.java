@@ -3,7 +3,6 @@ package com.Email_Service.Email_Service.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,17 +11,21 @@ import lombok.*;
 @Builder
 @Table(name = "email_templates")
 public class EmailTemplate {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "template_name", nullable = false, unique = true)
     private String templateName; // e.g., "USER_REGISTRATION", "BOOKING_CONFIRMATION"
 
+    @Column(name = "subject", nullable = false)
     private String subject; // Email subject
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "body", columnDefinition = "TEXT", nullable = false)
     private String body; // Email body with placeholders like {{username}}
 
+    @Column(name = "template_type", nullable = false)
     private String templateType; // "HTML" or "TEXT"
 
     public Long getId() {
@@ -31,6 +34,14 @@ public class EmailTemplate {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTemplateType() {
+        return templateType;
+    }
+
+    public void setTemplateType(String templateType) {
+        this.templateType = templateType;
     }
 
     public String getTemplateName() {
@@ -55,13 +66,5 @@ public class EmailTemplate {
 
     public void setBody(String body) {
         this.body = body;
-    }
-
-    public String getTemplateType() {
-        return templateType;
-    }
-
-    public void setTemplateType(String templateType) {
-        this.templateType = templateType;
     }
 }
