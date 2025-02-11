@@ -13,7 +13,7 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("User service API")
+                        .title("Email service API")
                         .version("1.0")
                         .description("API documentation for email Service application"));
     }
